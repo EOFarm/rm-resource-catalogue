@@ -203,7 +203,7 @@ Returns metadata records based on search request parameters.
 | application/xml
 
 | 200
-| The result set corresponding to a given search
+| The result set corresponding to a given search (if 'mode=opensearch' is specified)
 | application/atom+xml
 
 | 200
