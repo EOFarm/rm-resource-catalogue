@@ -159,4 +159,26 @@ http://portal.opengeospatial.org/files/?artifact_id=32319
 https://docs.aws.amazon.com/AmazonS3/latest/API
 | API Version 2006-03-01
 
+| [[OGC-OpenSearch-EO]][OGC-OpenSearch-EO]
+| OGC OpenSearch Extension for Earth Observation, +
+OGC 13-026r9, +
+http://docs.opengeospatial.org/is/13-026r9/13-026r9.html
+| v1.1, +
+25/11/2019
+
+| [[ISO-19115:2003]][ISO-19115:2003]
+| ISO 19115:2003 Geographic information — Metadata, +
+ISO 19115:2003, +
+https://www.iso.org/standard/26020.html
+| v1, +
+01/05/2003
+
+| [[ISO-19115-2:2009]][ISO-19115-2:2009]
+| ISO 19115-2:2009
+Geographic information — Metadata — Part 2: Extensions for imagery and gridded data, +
+ISO 19115-2:2009, +
+https://www.iso.org/standard/39229.html
+| v1, +
+01/02/2009
+
 |===

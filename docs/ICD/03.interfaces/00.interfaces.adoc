@@ -1,333 +1,16 @@
-= Data Access Interfaces
+= Data Discovery Interfaces
 
-== Enpoints
+== Endpoints
 
-=== Cache
+=== OGC CSW 3.0 / OpenSearch
 
-==== GET Capabilities
+==== GET Description Document
 
-`GET /cache/ows/wmts/1.0.0/WMTSCapabilities.xml`
-
-===== Description
-
-Returns the WMTS capabilities document, detailing all available tilesets, their respective grids and formats.
-
-===== Content Type
-
-* text/xml
-
-===== Responses
-
-[cols="2,3,1"]
-|===
-| Code | Message | Datatype
-
-| 200
-| The WMTS Capabilities Document
-| text/xml
-
-|===
-
-
-==== GET Tile
-
-`GET /cache/ows/wmts/1.0.0/{layer}/{style}/{starttime}--{endtime}/{tilematrixset}/{tilematrix}/{tilerow}/{tilecol}.{extension}``
+`GET /catalogue`
 
 ===== Description
 
-Returns the specified tile from the given layer in the specified style from the
-
-===== Parameters
-
-====== Path Parameters
-
-[cols="2,3,1"]
-|===
-| Name | Description | Required
-
-| layer
-| The data layer to retrieve tiles from
-| X
-
-| style
-| The layer rendering style
-| X
-
-| starttime
-| The start time of the time-dimension to include tiles from
-| X
-
-| endtime
-| The end time of the time-dimension to include tiles from
-| X
-
-| tilematrixset
-|
-| X
-
-| tilematrix
-| The used tile matrix set
-| X
-
-| tilematrix
-| The tile matrix (zoom level) to get the tiles from
-| X
-
-| tilerow
-| The tiles Y coordinate (row)
-| X
-
-| tilecol
-| The tiles X coordinate (column)
-| X
-
-| extension
-| The filename extension. Use `.jpg` to get JPEG encoded images and `.png` for PNG.
-| X
-
-|===
-
-===== Content Type
-
-* image/jpeg
-* image/png
-
-===== Responses
-
-[cols="2,3,1"]
-|===
-| Code | Message | Datatype
-
-| 200
-| The resulting image tile.
-| image/jpeg / image/png
-
-| 404
-| The tile was not found. Returns an empty image.
-| image/jpeg / image/png
-
-| 500
-|
-|
-
-|===
-
-=== Renderer
-
-==== OpenSearch Description
-
-`GET /opensearch/`
-
-===== Description
-
-Returns the root OpenSearch Description document of the Renderer.
-
-// ===== Parameters
-
-
-// ====== Path Parameters
-
-
-// ====== Query Parameters
-
-
-===== Content Type
-
-* application/opensearchdescription+xml
-
-===== Responses
-
-[cols="2,3,1"]
-|===
-| Code | Message | Datatype
-
-| 200
-|
-| application/opensearchdescription+xml
-
-| 404
-|
-|
-
-| 500
-|
-|
-
-|===
-
-==== OpenSearch Collection Search
-
-`GET /opensearch/{format}/`
-
-===== Description
-
-Performs a collection search of all collections on the Renderer using the search parameters provided.
-
-===== Parameters
-
-
-====== Path Parameters
-
-[cols="2,3,1"]
-|===
-| Name | Description | Required
-
-| format
-| The format to encode the search result in. One of `atom`, `rss`, `json`, `kml`, or `html`
-| X
-
-|===
-
-====== Query Parameters
-
-
-// TODO
-
-
-===== Content Type
-
-* application/atom+xml
-* application/rss+xml
-* application/vnd.google-earth.kml+xml
-* application/vnd.geo+json
-* text/html
-
-===== Responses
-
-[cols="2,3,1"]
-|===
-| Code | Message | Datatype
-
-| 200
-|
-|
-
-| 404
-|
-|
-
-| 500
-|
-|
-
-|===
-
-
-==== OpenSearch Collection Description
-
-`GET /opensearch/collections/{collection}`
-
-===== Description
-
-Returns the description  OpenSearch Description document of the Renderer.
-
-===== Parameters
-
-====== Path Parameters
-
-[cols="2,3,1"]
-|===
-| Name | Description | Required
-
-| collection
-| The collection to generate the description document
-| X
-
-|===
-
-===== Content Type
-
-* application/opensearchdescription+xml
-
-
-===== Responses
-
-[cols="2,3,1"]
-|===
-| Code | Message | Datatype
-
-| 200
-|
-| application/opensearchdescription+xml
-
-| 404
-|
-|
-
-| 500
-|
-|
-
-|===
-
-
-==== OpenSearch Record Search
-
-`GET /opensearch/collections/{collection}/{format}`
-
-===== Description
-
-Returns the root OpenSearch Description document of the Renderer.
-
-===== Parameters
-
-====== Path Parameters
-
-[cols="2,3,1"]
-|===
-| Name | Description | Required
-
-| collection
-| The collection to perform the record search on
-| X
-
-| format
-| The format to encode the search result in. One of `atom`, `rss`, `json`, `kml`, or `html`
-| X
-
-|===
-
-====== Query Parameters
-
-
-
-
-===== Content Type
-
-* application/atom+xml
-* application/rss+xml
-* application/vnd.google-earth.kml+xml
-* application/vnd.geo+json
-* text/html
-
-===== Responses
-
-[cols="2,3,1"]
-|===
-| Code | Message | Datatype
-
-| 200
-|
-|
-
-| 404
-|
-|
-
-| 500
-|
-|
-
-|===
-
-
-==== WMS Map Rendering
-
-`GET /ows`
-
-===== Description
-
-Renders a map from the specified parameters.
+Returns the Capabilities XML or OpenSearch description document.
 
 ===== Parameters
 
@@ -338,393 +21,175 @@ Renders a map from the specified parameters.
 | Name | Description | Required
 
 | service
-| The OWS service to use. Fixed to 'WMS' in this request.
+| The OWS service to use. Fixed to 'CSW' in this request.
 | X
 
 | version
-| The OWS service version to use. One of '1.0.0', '1.1.0', or '1.3.0'.
+| The OWS service version to use. One of '3.0.0' or '2.0.2'.
 | X
 
 | request
-| The OWS request type to use. Fixed to 'GetMap' in this request.
+| The OWS request type to use. Fixed to 'GetCapabilities' in this request.
 | X
 
-| layers
-| The comma-separated list of layers to be rendered. Layers specified later will be drawn over layers set earlier in the list
+| mode
+| The mode flag to use. Fixed to 'opensearch' in this request.
+|
+
+|===
+
+
+===== Content Type
+
+* application/xml
+
+===== Responses
+
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+| 200
+| Capabilities XML
+| application/xml
+
+| 200
+| The OpenSearch Description Document (if 'mode=opensearch' is specified)
+| application/xml
+
+| 400
+| Bad request
+| application/xml
+
+|===
+
+
+==== GET Records
+
+`GET /catalogue`
+
+===== Description
+
+Returns metadata records based on search request parameters.
+
+===== Parameters
+
+====== Query Parameters
+
+[cols="2,3,1"]
+|===
+| Name | Description | Required
+
+| service
+| The OWS service to use. Fixed to 'CSW' in this request.
 | X
 
-| styles
-| A comma separated list of rendering styles (one for each layer). Can be left empty to use default styles.
+| version
+| The OWS service version to use. One of '2.0.2' or '3.0.0'.
 | X
 
-| format
-| The format to encode the render result in. One of `image/jpeg`, `image/tiff`, or `image/png`.
+| request
+| The OWS request type to use. Fixed to 'GetRecords' in this request.
 | X
 
-| srs or crs
-| Version 1.3 uses `crs`, whereas other versions use `srs` as the parameter name. Specifies the output projection of the image and how the `bbox` is encoded.
+| mode
+| The mode to to use. Fixed to 'opensearch' in this request.
+|
+
+| typenames
+| Metadata record type to query. Fixed to 'csw:Record' in this request.
 | X
+
+| elementsetname
+| Metadata subset. One of 'brief', 'summary' or 'full' (default).
+| X
+
+| outputformat
+| The metadata encoding to use. One of 'application/xml' or 'application/json'
+|
+
+| outputschema
+| The metadata record schema to use.  One of 'http://www.opengis.net/cat/csw/3.0' or  'http://www.isotc211.org/2005/gmd'
+|
+
+| recordids
+| Comma-separated list of 1..n record ids to return
+|
+
+| q
+| Free-text search terms to query.
+|
 
 | bbox
-| The image bounding box to render the layer from. Expressed in the units of the `crs`/`srs`.
-| X
-
-| width
-| The width of the resulting image.
-| X
-
-| height
-| The height of the resulting image.
-| X
-
-| transparent
-| Whether or not to use transparency for not filled areas. Only usable with formats supporting transparency (e.g PNG). Use `true` to enable, `false` to disable. Default is disabled.
+| The record bounding bounding box to filter. Expressed as 'minx,minyx,maxx,maxy' in CRS84.
 |
 
-| bgcolor
-| The background color to use for non-filled areas encoded as a hexadecimally encoded RGB sextuplet: RRGGBB. Default is `FFFFFF` (white)
+| start
+| The starting temporal period to filter on.  Expressed as ISO8601.
 |
 
-| time
-| The time-filter to apply when rendering an image. Use two ISO8601 encoded datetime strings, separated with a '/' to denote the start and the end time bounds.
-| X
+| start
+| The ending temporal period to filter on.  Expressed as ISO8601.
+|
+
+| startposition
+| The page/offset on which to apply on the result set.
+|
+
+| maxrecords
+| The limit on which to apply on the result set.
+|
+
+| eo:cloudCover
+| Percentage of cloud cover to filter on (number).
+|
+
+| eo:instrument
+| Instrument to filter on.
+|
+
+| eo:platform
+| Platform to filter on.
+|
+
+| eo:orbitDirection
+| Orbit direction to filter on. One of 'DESCENDING' or 'ASCENDING'
+|
+
+| eo:orbitNumber
+| Orbit number to filter on.
+|
+
+| eo:processingLevel
+| The processing level applied to the entry
+|
+
+| eo:productType
+| Product type to filter on.
+|
+
+| eo:productType
+| Product type to filter on.
+|
+| eo:sensorType
+| Sensor type to filter on.
+|
+
+| eo:snowCover
+| Percentage of snow cover to filter on (number).
+|
+
+| eo:spectralRange
+| Sensor spectral range to filter on.
+|
 
 |===
 
-===== Content Type
-
-* image/png
-* image/jpeg
-* image/tiff
-
-===== Responses
-
-[cols="2,3,1"]
-|===
-| Code | Message | Datatype
-
-| 200
-| The rendered map image
-| image/png / image/jpeg / image/tiff
-
-| 400
-| Wrong parameter values.
-|
-
-| 500
-|
-|
-
-|===
-
-
-
-
-
-
-
-==== WCS Coverage Description
-
-`GET /ows`
-
-===== Description
-
-Returns the coverage description of a specified coverage.
-
-===== Parameters
-
-====== Query Parameters
-
-[cols="2,3,1"]
-|===
-| Name | Description | Required
-
-| service
-| The OWS service to use. Fixed to 'WCS' in this request.
-| X
-
-| version
-| The OWS service version to use. One of '2.0.0' or '2.1.0'.
-| X
-
-| request
-| The OWS request type to use. Fixed to 'DescribeCoverage' in this request.
-| X
-
-| coverageId
-| The coverage to get the description for.
-| X
-
-|===
 
 ===== Content Type
 
 * application/xml
-
-===== Responses
-
-[cols="2,3,1"]
-|===
-| Code | Message | Datatype
-
-| 200
-| The coverage description
-| application/xml
-
-| 400
-| Wrong parameter values.
-|
-
-| 500
-|
-|
-
-|===
-
-
-==== WCS EO Coverage Set Description
-
-`GET /ows`
-
-===== Description
-
-Returns the coverage description of a specified coverage.
-
-===== Parameters
-
-====== Query Parameters
-
-[cols="2,3,1"]
-|===
-| Name | Description | Required
-
-| service
-| The OWS service to use. Fixed to 'WCS' in this request.
-| X
-
-| version
-| The OWS service version to use. One of '2.0.0' or '2.1.0'.
-| X
-
-| request
-| The OWS request type to use. Fixed to 'DescribeEOCoverageSet' in this request.
-| X
-
-| eoId
-| The dataset series identifier or coverage identifier to explore.
-| X
-
-| eoId
-| The dataset series identifier or coverage identifier to explore.
-| X
-
-| subset
-| The spatial and/or temporal subset in the form: `<axis>(<low>,<high>)` to limit the search.
-|
-
-| containment
-| Whether the subsets shall be applied as intersections or overlaps. Values are one of `overlaps`, or `contains`.
-|
-
-| count
-| Limit the maximum number of returned records to this amount.
-|
-
-|===
-
-===== Content Type
-
-* application/xml
-
-===== Responses
-
-[cols="2,3,1"]
-|===
-| Code | Message | Datatype
-
-| 200
-| The EO coverage set description
-| application/xml
-
-| 400
-| Wrong parameter values.
-|
-
-| 500
-|
-|
-
-|===
-
-
-==== WCS Coverage Rendering
-
-`GET /ows`
-
-===== Description
-
-Renders the specified coverage according to the parameters
-
-===== Parameters
-
-====== Query Parameters
-
-[cols="2,3,1"]
-|===
-| Name | Description | Required
-
-| service
-| The OWS service to use. Fixed to 'WCS' in this request.
-| X
-
-| version
-| The OWS service version to use. One of '2.0.0' or '2.1.0'.
-| X
-
-| request
-| The OWS request type to use. Fixed to 'GetCoverage' in this request.
-| X
-
-| coverageId
-| The input coverage to use
-| X
-
-| format
-| The format to encode the rendered coverage in. One of `image/tiff`, `image/tiff`, or `image/png`.
-| X
-
-| mediatype
-|
-|
-
-| subset
-| Specifying a dimension-trim or -slice along a given axis. Must be in the form of either `<axis>(<low>,<high>)` for trims or `<axis>(<value>)` for slices. Can be specified multiple times, each for a separate axis.
-|
-
-| subsettingCrs
-| The coordinate reference system the subsets are expressed in. Also defines the output CRS when not explicitly overridden.
-|
-
-| outputCrs
-| The output coordinate reference system to use. If necessary, the output coverage will be transformed to that CRS.
-|
-
-| scaleFactor
-| Specifies a scale factor to be applied on all axes. The size of each axis will be increased (or decreased) by that factor.
-|
-
-| scaleAxes
-| A comma-separated list of items in the form: `<axis>(<scaleFactor>)` to define an axis specific scale factor.
-|
-
-| scaleSize
-| A comma-separated list of items in the form: `<axis>(<size>)` to define the output size for a specific axis.
-|
-
-| scaleExtent
-|
-|
-
-| interpolation
-| Define the interpolation method when reprojecting or scaling data. One of http://www.opengis.net/def/interpolation/OGC/1/nearest-neighbour (default), http://www.opengis.net/def/interpolation/OGC/1/average, or http://www.opengis.net/def/interpolation/OGC/1/bilinear
-|
-
-| geotiff:compression
-| Define the internal compression method when output format `image/tiff` is chosen. One of: None, PackBits, Huffman, LZW, JPEG, or Deflate.
-|
-
-| geotiff:jpeg_quality
-| Define the compression quality when JPEG compression is defined.
-|
-
-| geotiff:predictor
-| Define the used compression predictor method for LZW or Deflate compression methods. One of: None, Horizontal, or FloatingPoint
-|
-
-| geotiff:interleave
-| Specify whether the internal sample planes of TIFF results shall be pixel or band interleaved. Value must be one of Pixel, or Band.
-|
-
-| geotiff:tiling
-| Defines whether or not the resulting TIFF file shall be internally tiled or stripped. Values must either be `true` or `false`.
-|
-
-| geotiff:tilewidth
-| Specifies the width of each internal tile when `image/tiff` format is used.
-|
-
-| geotiff:tileheight
-| Specifies the height of each internal tile when `image/tiff` format is used.
-|
-
-|===
-
-===== Content Type
-
-* image/png
-* image/jpeg
-* image/tiff
-
-===== Responses
-
-[cols="2,3,1"]
-|===
-| Code | Message | Datatype
-
-| 200
-| The rendered map image
-| image/png / image/jpeg / image/tiff
-
-| 400
-| Wrong parameter values.
-|
-
-| 500
-|
-|
-
-|===
-
-
-
-
-
-
-
-=== Registrar
-
-==== Registration
-
-`POST /registration`
-
-===== Description
-
-Starts the registration of the specified catalog.json.
-
-===== Parameters
-
-====== Header Parameters
-
-This interface requires a valid JWT in the `Authorization` header using the `Bearer` scheme.
-
-====== JSON Parameters
-
-[cols="2,3,1"]
-|===
-| Name | Description | Required
-
-| url
-| The full S3 URL to the directory name of the catalog.json
-| X
-
-| item
-| The type of the registration. Unused for now.
-|
-
-|===
-
-===== Content Type
-
+* application/atom+xml
 * application/json
 
 ===== Responses
@@ -734,15 +199,19 @@ This interface requires a valid JWT in the `Authorization` header using the `Bea
 | Code | Message | Datatype
 
 | 200
-| The registration started successfully
+| The result set corresponding to a given search
+| application/xml
+
+| 200
+| The result set corresponding to a given search
+| application/atom+xml
+
+| 200
+| The result set corresponding to a given search
 | application/json
 
 | 400
-| Failed to start the registration of the specified catalog.json
-| application/json
-
-| 401
-| Failed to authorize the JWT
-| application/json
+| Bad request
+| application/xml
 
 |===
