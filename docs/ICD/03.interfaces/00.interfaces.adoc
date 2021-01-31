@@ -4,7 +4,7 @@
 
 === OGC CSW 3.0 / OpenSearch
 
-==== GET Description Document
+==== GET Capabilities / Description Document
 
 `GET /catalogue`
 
@@ -38,7 +38,6 @@ Returns the Capabilities XML or OpenSearch description document.
 
 |===
 
-
 ===== Content Type
 
 * application/xml
@@ -63,6 +62,65 @@ Returns the Capabilities XML or OpenSearch description document.
 
 |===
 
+
+==== GET Domain Values
+
+`GET /catalogue`
+
+===== Description
+
+Returns unique values of properties and API parameters.
+
+===== Parameters
+
+====== Query Parameters
+
+[cols="2,3,1"]
+|===
+| Name | Description | Required
+
+| service
+| The OWS service to use. Fixed to 'CSW' in this request.
+| X
+
+| version
+| The OWS service version to use. One of '3.0.0' or '2.0.2'.
+| X
+
+| request
+| The OWS request type to use. Fixed to 'GetDomain' in this request.
+| X
+
+| valuereference
+| The property name to query
+|
+
+| parametername
+| The API parameter to query
+|
+
+
+|===
+
+===== Content Type
+
+* application/xml
+
+===== Responses
+
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+| 200
+| GetDomain response XML
+| application/xml
+
+| 400
+| Bad request
+| application/xml
+
+|===
 
 ==== GET Records
 
@@ -109,7 +167,7 @@ Returns metadata records based on search request parameters.
 |
 
 | outputschema
-| The metadata record schema to use.  One of 'http://www.opengis.net/cat/csw/3.0' or  'http://www.isotc211.org/2005/gmd'
+| The metadata record schema to use.  One of 'http://www.opengis.net/cat/csw/3.0' or 'http://www.isotc211.org/2005/gmd'
 |
 
 | recordids
@@ -121,7 +179,11 @@ Returns metadata records based on search request parameters.
 |
 
 | bbox
-| The record bounding bounding box to filter. Expressed as 'minx,minyx,maxx,maxy' in CRS84.
+| The record bounding bounding box to filter on. Expressed as 'minx,minyx,maxx,maxy' in CRS84.
+|
+
+| time
+| The temporal period to filter on. Expressed as 'minx,minyx,maxx,maxy' in CRS84.
 |
 
 | start
@@ -185,7 +247,6 @@ Returns metadata records based on search request parameters.
 
 |===
 
-
 ===== Content Type
 
 * application/xml
@@ -215,3 +276,137 @@ Returns metadata records based on search request parameters.
 | application/xml
 
 |===
+
+==== GET Record by Identifier
+
+`GET /catalogue`
+
+===== Description
+
+Returns a single metadata record by identifier.
+
+===== Parameters
+
+====== Query Parameters
+
+[cols="2,3,1"]
+|===
+| Name | Description | Required
+
+| service
+| The OWS service to use. Fixed to 'CSW' in this request.
+| X
+
+| version
+| The OWS service version to use. One of '3.0.0' or '2.0.2'.
+| X
+
+| request
+| The OWS request type to use. Fixed to 'GetRecordById' in this request.
+| X
+
+| id
+| The mode flag to use. Fixed to 'opensearch' in this request.
+| X
+
+| elementsetname
+| Metadata subset. One of 'brief', 'summary' or 'full' (default).
+|
+
+| outputformat
+| The metadata encoding to use. One of 'application/xml' or 'application/json'
+|
+
+| outputschema
+| The metadata record schema to use.  One of 'http://www.opengis.net/cat/csw/3.0' or 'http://www.isotc211.org/2005/gmd'
+|
+|===
+
+===== Content Type
+
+* application/xml
+* application/json
+
+===== Responses
+
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+| 200
+| Metadata record document
+| application/xml
+
+| 200
+| Metadata record document
+| application/json
+
+| 400
+| Bad request
+| application/xml
+
+|===
+
+==== GET Record by Identifier in Native format
+
+`GET /catalogue`
+
+===== Description
+
+Returns a single metadata record by identifier in its native metadata format.
+
+===== Parameters
+
+====== Query Parameters
+
+[cols="2,3,1"]
+|===
+| Name | Description | Required
+
+| service
+| The OWS service to use. Fixed to 'CSW' in this request.
+| X
+
+| version
+| The OWS service version to use. One of '3.0.0' or '2.0.2'.
+| X
+
+| request
+| The OWS request type to use. Fixed to 'GetRepositoryItem' in this request.
+| X
+
+| id
+| The mode flag to use. Fixed to 'opensearch' in this request.
+| X
+
+|===
+
+===== Content Type
+
+* application/xml
+* application/json
+
+===== Responses
+
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+| 200
+| Metadata record document
+| application/xml
+
+| 200
+| Metadata record document
+| application/json
+
+| 400
+| Bad request
+| application/xml
+
+| 404
+| Record not found
+| application/xml
+
+|===
+
