@@ -1,0 +1,22 @@
+= Workflow
+
+== Backend ingest and metadata processing
+
+The metadata repository is initialized via the configuration that is defined
+as part of the resource-catalogue.  The registrar queries the backend to
+determine whether an incoming item has already been registered.
+
+If the item is a product, both the `MTD_MSIL2A.xml` and `INSPIRE.xml` files
+are processed and used as input to generate an ISO 19115-2 document with
+spatial and temporal extents, platform and instrument information, as well as
+links to all data and granules.
+
+If the item is a processing result, the STAC item is processed and used as
+input to generate an ISO 19115-2 document with spatial and temporal extents,
+platform and instrument information, as well as links to all results generated
+as a result of the process.
+
+In both cases, if the metadata record already exists in the
+resource-catalogue, and if overwriting is enabled, the record will be
+sent as an update.  Else, the record is sent as new metadata.
+
