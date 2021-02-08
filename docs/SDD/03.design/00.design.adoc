@@ -24,6 +24,9 @@ This service provides the following interfaces:
 . Open Archives Initiative Protocol for Metadata Harvesting (OAI-PMH)
 . Search/Retrieval via URL (SRU) search protocol
 
+Request / response mechanisms are via HTTP GET (KVP) and POST (XML). SOAP
+bindings are also supported.
+
 === Data
 ==== Configuration
 
