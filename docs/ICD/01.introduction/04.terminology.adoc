@@ -43,6 +43,9 @@ The following terms are used in the Master System Design.
 | Consumer
 | User accessing existing services/products within the EP. Consumers may be scientific/research or commercial, and may or may not be experts of the domain
 
+| Catalogue Service for the Web (CSW)
+| OGC standard that provides a simple HTTP interface for searching collections of descriptive metadata for data, services and relation information objects.
+
 | Data Access Library
 | An abstraction of the interface to the data layer of the resource tier. The library provides bindings for common languages (including python, Javascript) and presents a common object model to the code.
 
@@ -105,6 +108,9 @@ The following terms are used in the Master System Design.
 
 | Object Store
 | A computer data storage architecture that manages data as objects. Each object typically includes the data itself, a variable amount of metadata, and a globally unique identifier.
+
+| OGC API - Records (OARec)
+| Draft OGC API standard that provides the capability to create, modify, and query metadata on the Web. The draft specification enables the discovery of geospatial resources by standardizing the way collections of descriptive information about the resources (metadata) are exposed. OARec is the successor to OGC CSW specification.
 
 | On-demand Processing Service
 | A _Processing Service_ whose execution is initiated directly by the user on an ad-hoc basis.

@@ -112,6 +112,13 @@ https://openid.net/specs/openid-connect-core-1_0.html
 | v1.0, +
 08/11/2014
 
+| [[OARec]][OARec]
+| OGC API - Records - Part 1: Core, +
+OGC 20-004, +
+https://docs.ogc.org/DRAFTS/20-004.html
+| v1.0, +
+13/01/2020
+
 | [[OGC-CSW]][OGC-CSW]
 | OGC Catalogue Services 3.0 Specification - HTTP Protocol Binding (Catalogue Services for the Web), +
 OGC 12-176r7, +

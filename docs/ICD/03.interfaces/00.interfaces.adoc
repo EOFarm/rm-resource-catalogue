@@ -2,11 +2,430 @@
 
 == Endpoints
 
+=== OGC API - Records
+
+==== Landing page
+
+`GET /catalogue`
+
+===== Description
+
+Returns an overview of the service, endpoints, and contact.
+
+===== Parameters
+
+====== Query Parameters
+
+[cols="2,3,1"]
+|===
+| Name | Description | Required
+
+| f
+| The output format of the response. One of `json` or `html`.
+|
+
+|===
+
+===== Content Type
+
+* application/json
+* text/html
+
+===== Responses
+
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+| 200
+| The landing page
+| application/json
+
+| 200
+| The landing page
+| text/html
+
+| 400
+| Bad request
+| application/json
+
+| 400
+| Bad request
+| text/html
+
+|===
+
+==== OpenAPI
+
+`GET /catalogue/openapi`
+
+===== Description
+
+Provides an OpenAPI document describing service endpoints, models, perameters, and other API information.
+
+===== Parameters
+
+====== Query Parameters
+
+[cols="2,3,1"]
+|===
+| Name | Description | Required
+
+| f
+| The output format of the response. One of `json` or `html`.
+|
+
+|===
+
+===== Content Type
+
+* application/json
+* text/html
+
+===== Responses
+
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+| 200
+| The OpenAPI document
+| application/vnd.oai.openapi+json;version=3.0
+
+| 200
+| The OpenAPI document via Swagger
+| text/html
+
+| 400
+| Bad request
+| application/json
+
+| 400
+| Bad request
+| text/html
+
+|===
+
+==== Conformance
+
+`GET /catalogue/conformance`
+
+===== Description
+
+Returns a list of supported OGC API conformance classes.
+
+===== Parameters
+
+====== Query Parameters
+
+[cols="2,3,1"]
+|===
+| Name | Description | Required
+
+| f
+| The output format of the response. One of `json` or `html`.
+|
+
+|===
+
+===== Content Type
+
+* application/json
+* text/html
+
+===== Responses
+
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+| 200
+| The conformance page
+| application/json
+
+| 200
+| The conformance page
+| text/html
+
+| 400
+| Bad request
+| application/json
+
+| 400
+| Bad request
+| text/html
+
+|===
+
+==== Collections
+
+`GET /catalogue/collections`
+
+===== Description
+
+Returns a list of collections of metadata.
+
+===== Parameters
+
+====== Query Parameters
+
+[cols="2,3,1"]
+|===
+| Name | Description | Required
+
+| f
+| The output format of the response. One of `json` or `html`.
+|
+
+|===
+
+===== Content Type
+
+* application/json
+* text/html
+
+===== Responses
+
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+| 200
+| The listing of metadata collections
+| application/json
+
+| 200
+| The listing of metadata collections
+| text/html
+
+| 400
+| Bad request
+| application/json
+
+| 400
+| Bad request
+| text/html
+
+|===
+
+==== Main collection
+
+`GET /catalogue/collections/metadata:main`
+
+===== Description
+
+Returns a description of the main collection of metadata.
+
+===== Parameters
+
+====== Query Parameters
+
+[cols="2,3,1"]
+|===
+| Name | Description | Required
+
+| f
+| The output format of the response. One of `json` or `html`.
+|
+
+|===
+
+===== Content Type
+
+* application/json
+* text/html
+
+===== Responses
+
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+| 200
+| The description of the main metadata collection
+| application/json
+
+| 200
+| The description of the main metadata collection
+| text/html
+
+| 400
+| Bad request
+| application/json
+
+| 400
+| Bad request
+| text/html
+
+|===
+
+==== Main collection queryables
+
+`GET /catalogue/collections/metadata:main/queryables`
+
+===== Description
+
+Returns a listing of all queryables of the main collection of metadata.
+
+===== Parameters
+
+====== Query Parameters
+
+[cols="2,3,1"]
+|===
+| Name | Description | Required
+
+| f
+| The output format of the response. One of `json` or `html`.
+|
+
+|===
+
+===== Content Type
+
+* application/json
+* text/html
+
+===== Responses
+
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+| 200
+| The main metadata collection's queryables
+| application/json
+
+| 200
+| The main metadata collection's queryables
+| text/html
+
+| 400
+| Bad request
+| application/json
+
+| 400
+| Bad request
+| text/html
+
+|===
+
+==== Metadata collection items
+
+`GET /catalogue/collections/metadata:main/items`
+
+===== Description
+
+Returns metadata items as a result of query.
+
+===== Parameters
+
+====== Query Parameters
+
+[cols="2,3,1"]
+|===
+| Name | Description | Required
+
+| f
+| The output format of the response. One of `json` or `html`.
+|
+
+| q
+| Free-text search terms to query.
+|
+
+| bbox
+| The record bounding bounding box to filter on. Expressed as 'minx,minyx,maxx,maxy' in CRS84.
+|
+
+| datetime
+| The temporal period to filter on. Expressed as 'minx,minyx,maxx,maxy' in CRS84.
+|
+
+| startindex
+| The page/offset on which to apply on the result set.
+|
+
+| limit
+| The limit on which to apply on the result set.
+|
+
+| filter
+| The CQL TEXT filter to apply when querying records.
+|
+
+|===
+
+==== Metadata collection item
+
+`GET /catalogue/collections/metadata:main/items/{recordId}`
+
+===== Description
+
+Returns a single metadata item.
+
+===== Parameters
+
+====== Query Parameters
+
+[cols="2,3,1"]
+|===
+| Name | Description | Required
+
+| f
+| The output format of the response. One of `json`, `xml` or `html`.
+|
+
+|===
+
+===== Content Type
+
+* application/json
+* application/xml
+* text/html
+
+===== Responses
+
+[cols="2,3,1"]
+
+|===
+| Code | Message | Datatype
+
+| 200
+| The single record result
+| application/json
+
+| 200
+| The single record result
+| application/xml
+
+| 200
+| The single record result
+| text/html
+
+| 400
+| Bad request
+| application/json
+
+| 400
+| Bad request
+| text/html
+
+| 404
+| Record not found
+| application/json
+
+| 404
+| Record not found
+| text/html
+
+|===
+
 === OGC CSW 3.0 / OpenSearch
 
 ==== GET Capabilities / Description Document
 
-`GET /catalogue`
+`GET /catalogue/csw`
 
 ===== Description
 
@@ -65,7 +484,7 @@ Returns the Capabilities XML or OpenSearch description document.
 
 ==== GET Domain Values
 
-`GET /catalogue`
+`GET /catalogue/csw`
 
 ===== Description
 
@@ -124,7 +543,7 @@ Returns unique values of properties and API parameters.
 
 ==== GET Records
 
-`GET /catalogue`
+`GET /catalogue/csw`
 
 ===== Description
 
@@ -279,7 +698,7 @@ Returns metadata records based on search request parameters.
 
 ==== GET Record by Identifier
 
-`GET /catalogue`
+`GET /catalogue/csw`
 
 ===== Description
 
@@ -349,7 +768,7 @@ Returns a single metadata record by identifier.
 
 ==== GET Record by Identifier in Native format
 
-`GET /catalogue`
+`GET /catalogue/csw`
 
 ===== Description
 

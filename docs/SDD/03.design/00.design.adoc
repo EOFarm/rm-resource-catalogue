@@ -18,13 +18,14 @@ configuration.
 
 This service provides the following interfaces:
 
+. OGC API - Records - Part 1.0, Core, version 1.0
 . OGC Catalogue Service for the Web, version 3.0.0
 . OGC Catalogue Service for the Web, version 2.0.2
 . OpenSearch with Extensions for Geo, Time and Earth Observation
 . Open Archives Initiative Protocol for Metadata Harvesting (OAI-PMH)
 . Search/Retrieval via URL (SRU) search protocol
 
-Request / response mechanisms are via HTTP GET (KVP) and POST (XML). SOAP
+Request / response mechanisms are via HTTP GET (RESTful / KVP) and POST (XML/JSON). SOAP
 bindings are also supported.
 
 === Data

@@ -14,6 +14,8 @@ The following acronyms and abbreviations have been used in this report.
 | AOI | Area of Interest
 | API | Application Programming Interface
 | CMS | Content Management System
+| CQL | Common Query Language
+| CSW | Catalogue Service for the Web
 | CWL | Common Workflow Language
 | DAL | Data Access Library
 | EMS | Execution Management Service
@@ -27,6 +29,7 @@ The following acronyms and abbreviations have been used in this report.
 | K8s | Kubernetes
 | KVP | Key-value Pair
 | M2M | Machine-to-machine
+| OARec | OGC API - Records
 | OGC | Open Geospatial Consortium
 | PDE | Processor Development Environment
 | PDP | Policy Decision Point
